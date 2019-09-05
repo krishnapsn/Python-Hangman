@@ -57,3 +57,11 @@ def redraw_game_window():
     pic = hangmanPics[limbs]
     win.blit(pic, (winWidth/2 - pic.get_width()/2 + 20, 150))
     pygame.display.update()
+
+
+def randomWord():
+    file = open('words.txt')
+    f = file.readlines()
+    i = random.randrange(0, len(f) - 1)
+
+    return f[i][:-1]
