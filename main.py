@@ -96,3 +96,33 @@ def buttonHit(x, y):
             if y < buttons[i][2] + 20 and y > buttons[i][2] - 20:
                 return buttons[i][5]
     return None
+
+
+def end(winner=False):
+    global limbs
+    lostTxt = 'You Lost, press any key to play again...'
+    winTxt = 'WINNER!, press any key to play again...'
+    redraw_game_window()
+    pygame.time.delay(1000)
+    win.fill(GREEN)
+
+    if winner == True:
+        label = lost_font.render(winTxt, 1, BLACK)
+    else:
+        label = lost_font.render(lostTxt, 1, BLACK)
+
+    wordTxt = lost_font.render(word.upper(), 1, BLACK)
+    wordWas = lost_font.render('The phrase was: ', 1, BLACK)
+
+    win.blit(wordTxt, (winWidth/2 - wordTxt.get_width()/2, 295))
+    win.blit(wordWas, (winWidth/2 - wordWas.get_width()/2, 245))
+    win.blit(label, (winWidth / 2 - label.get_width() / 2, 140))
+    pygame.display.update()
+    again = True
+    while again:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                again = False
+    reset()
