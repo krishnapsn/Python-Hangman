@@ -126,3 +126,34 @@ def end(winner=False):
             if event.type == pygame.KEYDOWN:
                 again = False
     reset()
+
+
+def reset():
+    global limbs
+    global guessed
+    global buttons
+    global word
+    for i in range(len(buttons)):
+        buttons[i][4] = True
+
+    limbs = 0
+    guessed = []
+    word = randomWord()
+
+# MAINLINE
+
+
+# Setup buttons
+increase = round(winWidth / 13)
+for i in range(26):
+    if i < 13:
+        y = 40
+        x = 25 + (increase * i)
+    else:
+        x = 25 + (increase * (i - 13))
+        y = 85
+    buttons.append([LIGHT_BLUE, x, y, 20, True, 65 + i])
+    # buttons.append([color, x_pos, y_pos, radius, visible, char])
+
+word = randomWord()
+inPlay = True
