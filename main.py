@@ -157,3 +157,31 @@ for i in range(26):
 
 word = randomWord()
 inPlay = True
+
+while inPlay:
+    redraw_game_window()
+    pygame.time.delay(10)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            inPlay = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                inPlay = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            clickPos = pygame.mouse.get_pos()
+            letter = buttonHit(clickPos[0], clickPos[1])
+            if letter != None:
+                guessed.append(chr(letter))
+                buttons[letter - 65][4] = False
+                if hang(chr(letter)):
+                    if limbs != 5:
+                        limbs += 1
+                    else:
+                        end()
+                else:
+                    print(spacedOut(word, guessed))
+                    if spacedOut(word, guessed).count('_') == 0:
+                        end(True)
+
+pygame.quit()
